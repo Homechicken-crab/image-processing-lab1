@@ -22,7 +22,9 @@ matlab -wait -nosplash -batch "addpath('code'); ID_main"
 matlab -wait -nosplash -batch "addpath('code'); ID_gaussian"
 ```
 
-程序按自身位置定位输入和输出，移动整个项目后仍可运行。图形窗口均设置为不可见，结果直接导出到 `results`；再次运行会覆盖对应图片。程序只生成十张主要结果图，计算检查和运行状态直接输出到命令行。
+七个分项均为独立脚本，按 `%%` 分节，每次运行先清理工作区。`ID_main.m` 只按顺序运行七项脚本。
+
+程序按自身位置定位输入和输出，移动整个项目后仍可运行。图形窗口均设置为不可见，结果直接导出到 `results`；再次运行会覆盖对应图片。程序只生成十张主要结果图，简短完成提示直接输出到命令行。
 
 ## 实验与参数
 
@@ -32,7 +34,7 @@ matlab -wait -nosplash -batch "addpath('code'); ID_gaussian"
 | `ID_gaussian.m` | Barbara 图像；高斯噪声均值 0、方差 0.01，twister 种子 2026；加噪后截断到 [0,1]；5×5、σ=1 高斯核，对称延拓卷积。 |
 | `ID_laplace.m` | Barbara 图像；模板 `[1 0 1; 0 -4 0; 1 0 1]`；对称延拓；蓝白红对称色标显示有符号响应。 |
 | `ID_rank_filter.m` | 飞机图像；椒盐密度 0.05，盐、椒概率各 0.025，twister 种子 2027；同一含噪图像分别做 3×3 最小值、中值和最大值滤波，对称延拓。 |
-| `ID_fft.m` | Barbara 图像；`fftshift(fft2(I))` 中心化；绘制二维和三维 `log(1+abs(F))`；检查逆变换与能量关系。 |
+| `ID_fft.m` | Barbara 图像；`fftshift(fft2(I))` 中心化；绘制二维和三维 `log(1+abs(F))`。 |
 | `ID_lowpass.m` | 384×384 响应展示，D₀=90，Butterworth 二阶；实际输入宽 1198、高 767，补零为 1534×2396（行×列），滤波器匹配该尺寸，反中心化、逆变换后裁剪左上角原图区域。 |
 | `ID_spatial_frequency.m` | Barbara 图像；同一 5×5、σ=1 高斯核，两种方法都使用零延拓卷积；FFT 尺寸 516×516，将核中心移到 (1,1)，统一裁剪，输出最大绝对误差和均方误差。 |
 
